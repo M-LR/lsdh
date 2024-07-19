@@ -3,6 +3,7 @@ import Construction from "@/components/Construction";
 import "./globals.scss";
 import { Ubuntu } from "next/font/google";
 import Header from "@/components/Header";
+import Providers from "@/components/Providers";
 
 const ubuntu = Ubuntu({ weight: ['300','500', '700'], subsets: ["latin"]});
 export const metadata = {
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`${ubuntu.className} h-screen w-screen bg-violet-200 dark:bg-violet-950 dark:text-indigo-100`}>
-        <Header />
-        <main >{children}</main>
-        <Construction />
+        <Providers>
+          <Header />
+          <main >{children}</main>
+          <Construction />
+        </Providers>
       </body>
     </html>
   );

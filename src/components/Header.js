@@ -16,13 +16,17 @@ const Header = () => {
       };
 
     const menuItems = [
-         {
-            title : 'Qui sommes-nous ?',
-             link : '/about'},
-         {
-            title : 'Nous soutenir',
-             link : 'https://www.helloasso.com/associations/les-studios-du-heron'
-         }   
+        {
+        title : 'Accueil',
+            link : '/home'
+        },
+        {
+        title : 'Qui sommes-nous ?',
+            link : '/about'},
+        {
+        title : 'Nous soutenir',
+            link : 'https://www.helloasso.com/associations/les-studios-du-heron'
+        }   
     ];
 
     return (
@@ -73,11 +77,16 @@ const Header = () => {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div className="flex flex-shrink-0 items-center">
                         <Link className={`${raleway.className} text-2xl text-violet-950 dark:text-indigo-100 font-extrabold`} href="/">
-                            L.S.H
+                            {`${process.env.NEXT_PUBLIC_SITE_NAME}`}
                         </Link>
                     </div>
                     <div className="hidden sm:ml-6 sm:block">
                         <div className="flex space-x-4">
+
+                            <Link href="/home" className="rounded-md text-violet-950 dark:text-indigo-100 hover:bg-violet-700 hover:text-indigo-100 px-3 py-2 text-sm font-medium" aria-current="page">
+                            Accueil
+                            </Link>
+
                             <Link href="/about" className="rounded-md text-violet-950 dark:text-indigo-100 hover:bg-violet-700 hover:text-indigo-100 px-3 py-2 text-sm font-medium" aria-current="page">
                             Qui sommes-nous ?
                             </Link>
