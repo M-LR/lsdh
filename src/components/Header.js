@@ -1,142 +1,124 @@
 "use client";
-import { Switch } from '@headlessui/react'
-import { useState } from "react";
-import Link from 'next/link';
-import { Raleway } from "next/font/google";
 
-const raleway = Raleway({ weight: ['300','500', '700'], subsets: ["latin"]});
+import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { Switch, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
+import { Raleway } from "next/font/google";
+import { IoOpenOutline } from "react-icons/io5";
+import { useTheme } from "next-themes";
+
+const raleway = Raleway({ weight: ['300', '500', '700'], subsets: ["latin"] });
 
 const Header = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { theme, setTheme } = useTheme();
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
+            setIsDarkMode(storedDarkMode);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+        }
+    }, [isDarkMode]);
 
     const toggleDarkMode = () => {
-        document.documentElement.classList.toggle('dark');
+        if (theme !== 'dark') {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
         setIsDarkMode(!isDarkMode);
-      };
+    };
 
     const menuItems = [
         {
-        title : 'Accueil',
-            link : '/home'
+            title: 'L\'association',
+            link: '/about'
         },
         {
-        title : 'Qui sommes-nous ?',
-            link : '/about'},
+            title: 'Nous soutenir',
+            link: 'https://www.helloasso.com/associations/les-studios-du-heron'
+        },
         {
-        title : 'Nous soutenir',
-            link : 'https://www.helloasso.com/associations/les-studios-du-heron'
-        }   
+            title: 'Contacts',
+            link: '#'
+        }
     ];
 
     return (
-    <nav className="bg-violet-200 dark:bg-violet-950 z-50">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    {/* Mobile menu button */}
-                    <button
-                    type="button"
-                    className="relative inline-flex items-center justify-center rounded-md p-2 text-violet-950 dark:text-indigo-200 hover:bg-violet-950 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                    aria-controls="mobile-menu"
-                    aria-expanded={isMenuOpen}
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    >
-                        <span className="absolute -inset-0.5"></span>
-                        <span className="sr-only">Open main menu</span>
-                        <svg
-                            className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                            />
-                        </svg>
-                        <svg
-                            className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </button>
-                </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                    <div className="flex flex-shrink-0 items-center">
-                        <Link className={`${raleway.className} text-2xl text-violet-950 dark:text-indigo-100 font-extrabold`} href="/">
-                            {`${process.env.NEXT_PUBLIC_SITE_NAME}`}
-                        </Link>
-                    </div>
-                    <div className="hidden sm:ml-6 sm:block">
-                        <div className="flex space-x-4">
+        <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} className={`${raleway.className}`}>
+            <NavbarContent justify="start">
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className="sm:hidden"
+                />
+                <NavbarBrand>
+                    <Link href="/" aria-current="page">
+                        <p className="font-bold text-inherit text-violet-950 dark:text-violet-600">{process.env.NEXT_PUBLIC_SITE_NAME}</p>
+                    </Link>
+                </NavbarBrand>
+            </NavbarContent>
 
-                            <Link href="/home" className="rounded-md text-violet-950 dark:text-indigo-100 hover:bg-violet-700 hover:text-indigo-100 px-3 py-2 text-sm font-medium" aria-current="page">
-                            Accueil
-                            </Link>
+            <NavbarContent className="hidden sm:flex" justify='center'>
+                <NavbarItem>
+                    <Link href="/about">
+                        L&apos;association
+                    </Link>
+                </NavbarItem>
+                <NavbarItem className='text-center flex items-center justify-center space-x-2'>
+                    <Link href="https://www.helloasso.com/associations/les-studios-du-heron" target='blank'>
+                        <span>Nous soutenir</span>
+                    </Link>
+                    <IoOpenOutline />
+                </NavbarItem>
+                <NavbarItem className='flex-1'>
+                    <Link href="#">
+                        Contacts
+                    </Link>
+                </NavbarItem>
+            </NavbarContent>
 
-                            <Link href="/about" className="rounded-md text-violet-950 dark:text-indigo-100 hover:bg-violet-700 hover:text-indigo-100 px-3 py-2 text-sm font-medium" aria-current="page">
-                            Qui sommes-nous ?
-                            </Link>
+            <NavbarContent justify="end">
+                <label className="flex cursor-pointer gap-2">
+                    {isDarkMode ? (
+                        <i className="ri-sun-line"></i>
+                    ) : (
+                        <i className="ri-sun-fill text-xl"></i>
+                    )}
+                    <Switch
+                        color="primary"
+                        checked={isDarkMode}
+                        onChange={toggleDarkMode}
+                    />
+                    {isDarkMode ? (
+                        <i className="ri-moon-fill text-xl"></i>
+                    ) : (
+                        <i className="primary ri-moon-line"></i>
+                    )}
+                </label>
+            </NavbarContent>
 
-                            <Link href="https://www.helloasso.com/associations/les-studios-du-heron" className="rounded-md text-violet-950 dark:text-indigo-100 hover:bg-violet-700 hover:text-indigo-100 px-3 py-2 text-sm font-medium">
-                            Nous soutenir
-                            </Link>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <div className="flex items-center">
-                        <div className="flex items-center gap-2">
-                        {isDarkMode ? (
-                            <i className="text-violet-500 ri-sun-line"></i>
-                        ) : (
-                            <i className="text-violet-950 ri-sun-fill text-xl"></i>
-                        )}
-                        <Switch
-                            onChange={toggleDarkMode}
-                            checked={isDarkMode}
-                            className={`${isDarkMode ? 'bg-violet-500' : 'bg-violet-950'} mx-1 group inline-flex h-6 w-11 items-center rounded-full transition`}
-                        >
-                            <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
-                        </Switch>
-                        {isDarkMode ? (
-                            <i className="text-violet-500 ri-moon-fill text-xl"></i>
-                        ) : (
-                            <i className="text-violet-950 ri-moon-line"></i>
-                        )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {/* Mobile menu, show/hide based on menu state */}
-        <div className={`${isMenuOpen ? "block" : "hidden"} sm:hidden`} id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <NavbarMenu>
                 {menuItems.map((item, index) => (
-                <Link key={index} href={item.link}>
-                    <span className='block rounded-md px-3 py-2 text-base font-medium text-violet-950 dark:text-indigo-100 hover:bg-violet-700 hover:text-indigo-100'>
-                    {item.title}
-                    </span>
-                </Link>
+                    <NavbarMenuItem key={index}>
+                        <Link
+                            className="w-full"
+                            href={item.link}
+                            size="lg"
+                        >
+                            {item.title}
+                        </Link>
+                    </NavbarMenuItem>
                 ))}
-            </div>
-        </div>
-    </nav>  
-    )
+            </NavbarMenu>
+        </Navbar>
+    );
 };
 
 export default Header;
