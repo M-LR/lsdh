@@ -19,9 +19,9 @@ import Link from "next/link";
         </div>
         <div className="mx-4 mt-4 md:w-1/3">
             
-            <p className="text-xl text-justify">
+            <div className="text-xl text-justify">
             {mainText}
-            </p>
+            </div>
             
         </div>    
       </>
