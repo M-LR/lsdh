@@ -1,3 +1,8 @@
+/**
+ * @file Home.jsx
+ * @description Composant principal pour la page d'accueil de l'application. Il récupère les données depuis Notion, traite ces données et affiche les sections Hero, Card et Footer.
+ */
+
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -6,6 +11,12 @@ import Hero from '@/components/Hero';
 import Card from "@/components/Card";
 import Footer from '@/components/Footer';
 
+/**
+ * @function fetchNotionData
+ * @description Fonction asynchrone pour récupérer les données depuis l'API Notion.
+ * @param {string} databaseId - ID de la base de données Notion.
+ * @returns {Promise<Object>} Les données récupérées depuis Notion.
+ */
 const fetchNotionData = async (databaseId) => {
   const response = await fetch(`/api/notion?databaseId=${databaseId}`);
   if (!response.ok) {
@@ -15,6 +26,12 @@ const fetchNotionData = async (databaseId) => {
   return data;
 };
 
+/**
+ * @function processData
+ * @description Traite les données récupérées depuis Notion pour extraire les titres et les textes des sections.
+ * @param {Array} data - Les données récupérées depuis Notion.
+ * @returns {Object} Un objet contenant les textes pour les sections Hero et Main.
+ */
 const processData = (data) => {
   let heroTitle = '';
   let heroText = '';
@@ -35,6 +52,10 @@ const processData = (data) => {
   return { heroTitle, heroText, mainText };
 };
 
+/**
+ * @component
+ * @description Composant principal pour la page d'accueil. Gère l'état de chargement et d'erreur, récupère et traite les données depuis Notion, et affiche les composants Hero, Card et Footer.
+ */
 export default function Home() {
   const [error, setError] = useState(null);
   const [heroTitle, setHeroTitle] = useState('');
