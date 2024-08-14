@@ -8,7 +8,7 @@ export default function App() {
         <div className="flex flex-col items-center w-full">
 
   <div className="w-full p-4 relative">
-    <h1 className="text-4xl text-center">Les valeurs du Héron 🪿 <span className="text-sm absolute right-600 top-6 w-100">← c&apos; est une oie pas un héron</span></h1>
+    <h1 className="text-4xl text-center">Les valeurs du Héron 🪿 <span className="text-sm absolute sm:right-600 sm:top-6 w-100">← c&apos; est une oie pas un héron</span></h1>
     <div></div>
   </div>
 
@@ -18,15 +18,18 @@ export default function App() {
     <div className="flex flex-1 justify-center mx-4">
       <ul className="flex flex-col items-center">
         <li className="h-[200px] flex flex-col justify-center p-4 w-full">
-          <p>
+        <p>
             <Chip size="lg" color="primary">
               <i className="ri-service-fill ri-xl"></i>
             </Chip> &nbsp;
-            Défendre des valeurs humaines et inclusives
-          </p>
-          <p className="mx-[65px] mt-4 text-justify text-violet-950 dark:text-violet-600 w-2/3">
-            Principes essentiels pour favoriser la coexistence pacifique entre les individus de diverses origines, cultures et croyances.
-          </p>
+          
+            
+              Défendre des valeurs inclusives
+            </p>
+            <p className="mx-[65px] mt-4 text-justify text-violet-950 dark:text-violet-600 w-2/3">
+              Principes essentiels pour favoriser la coexistence pacifique entre les individus de diverses origines, cultures et croyances.
+            </p>
+        
         </li>
         <li className="h-[200px] flex flex-col justify-center p-4 w-full">
           <p>
@@ -39,7 +42,7 @@ export default function App() {
             Protéger la biodiversité commence par une prise de conscience de l&apos;impact de nos actions quotidiennes sur la planète.
           </p>
         </li>
-        <li className="h-[200px] flex flex-col justify-center  p-4 w-full">
+        <li className="h-[300px] sm:h-[200px] flex flex-col justify-center  p-4 w-full">
           <p>
             <Chip size="lg" color="primary">
               <i className="ri-megaphone-fill ri-xl"></i>
@@ -54,7 +57,7 @@ export default function App() {
     </div>
 
 
-    <div className="flex flex-1 items-center justify-center mt-4">
+    <div className="flex flex-1 items-center justify-center mt-8 sm:mt-4">
       <Image
         alt="nextui logo"
         height={500}
