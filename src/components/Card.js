@@ -2,7 +2,8 @@
 import React from "react";
 import {Chip, Image} from "@nextui-org/react";
 
-export default function App() {
+export default function Card({values}) {
+
   return (
     <>
         <div className="flex flex-col items-center w-full">
@@ -17,42 +18,24 @@ export default function App() {
 
     <div className="flex flex-1 justify-center mx-4">
       <ul className="flex flex-col items-center">
-        <li className="h-[200px] flex flex-col justify-center p-4 w-full">
-        <p>
-            <Chip size="lg" color="primary">
-              <i className="ri-service-fill ri-xl"></i>
-            </Chip> &nbsp;
-          
-            
-              Défendre des valeurs inclusives
-            </p>
-            <p className="mx-[65px] mt-4 text-justify text-violet-950 dark:text-violet-600 w-2/3">
-              Principes essentiels pour favoriser la coexistence pacifique entre les individus de diverses origines, cultures et croyances.
-            </p>
-        
-        </li>
-        <li className="h-[200px] flex flex-col justify-center p-4 w-full">
-          <p>
-            <Chip size="lg" color="primary">
-              <i className="ri-leaf-fill ri-xl"></i>
-            </Chip> &nbsp;
-            Respecter l&apos;environnement
-          </p>
-          <p className="mx-[65px] mt-4 text-justify text-violet-950 dark:text-violet-600 w-2/3">
-            Protéger la biodiversité commence par une prise de conscience de l&apos;impact de nos actions quotidiennes sur la planète.
-          </p>
-        </li>
-        <li className="h-[300px] sm:h-[200px] flex flex-col justify-center  p-4 w-full">
-          <p>
-            <Chip size="lg" color="primary">
-              <i className="ri-megaphone-fill ri-xl"></i>
-            </Chip> &nbsp;
-            Exprimer ses opinions 
-          </p>
-          <p className="mx-[65px] mt-4 text-justify text-violet-950 dark:text-violet-600 w-2/3">
-          L&apos;expression de ses opinions est une pierre angulaire de la démocratie et du progrès social. En exerçant cette liberté avec responsabilité et respect, nous pouvons contribuer à un dialogue enrichissant, à une meilleure compréhension mutuelle et à une société plus inclusive et harmonieuse. 
-          </p>
-        </li>
+
+        {values.map((item, index) => (
+
+         
+           <li key={index} className={`${item.text.length > 200 ?' h-[300px] sm:h-[200px]' : 'h-[200px]'}  flex flex-col justify-center p-4 w-full`}>
+           <p>
+             <Chip size="lg" color="primary">
+               <i className={`${item.chip} ri-xl`}></i>
+             </Chip> &nbsp; 
+               {item.title}
+             </p>
+             <p className="mx-[65px] mt-4 text-justify text-violet-950 dark:text-violet-600 w-2/3">
+               {item.text}
+             </p>
+         </li>
+        ))}
+
+      
       </ul>
     </div>
 

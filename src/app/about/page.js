@@ -33,9 +33,11 @@ const fetchNotionData = async (databaseId) => {
  * @returns {Object} Un objet contenant les textes pour les sections Hero et Main.
  */
 const processData = (data) => {
+  
   let heroTitle = '';
   let heroText = '';
   let mainText = '';
+  let values = [];
 
   data.forEach((item) => {
     item.properties.page.rich_text.forEach((page) => {
@@ -46,10 +48,17 @@ const processData = (data) => {
       if (page.text.content === 'home section_2') {
         mainText = item.properties.text.rich_text[0]?.text?.content || '';
       }
+      if (page.text.content === 'value') {
+        values.push({
+          title: item.properties.title.title[0]?.text?.content || '',
+          text : item.properties.text.rich_text[0]?.text?.content || '',
+          chip : item.properties.chip.rich_text[0]?.text?.content || '',
+        })
+      }
     });
   });
 
-  return { heroTitle, heroText, mainText };
+  return { heroTitle, heroText, mainText, values };
 };
 
 /**
@@ -61,6 +70,7 @@ export default function Home() {
   const [heroTitle, setHeroTitle] = useState('');
   const [heroText, setHeroText] = useState('');
   const [mainText, setMainText] = useState('');
+  const [values, setValues] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const databaseId = process.env.NEXT_PUBLIC_NOTION_DATABASE_ID;
@@ -69,10 +79,11 @@ export default function Home() {
     const loadNotionData = async () => {
       try {
         const data = await fetchNotionData(databaseId);
-        const { heroTitle, heroText, mainText } = processData(data);
+        const { heroTitle, heroText, mainText, values } = processData(data);
         setHeroTitle(heroTitle);
         setHeroText(heroText);
         setMainText(mainText);
+        setValues(values);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError(error.toString());
@@ -106,7 +117,7 @@ export default function Home() {
         <Hero heroTitle={heroTitle} heroText={heroText} mainText={mainText} />
       </div>
       <div className="flex flex-col md:flex-row justify-center items-center my-32 mx-auto max-w-screen-2xl py-10 shadow-xl dark:shadow-violet-600">
-        <Card />
+        <Card values={values} />
       </div>
       <Footer />
     </>

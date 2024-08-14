@@ -88,7 +88,7 @@ const Header = () => {
                     ))}
                     <NavbarItem className='flex-1'>
                         <Link href="https://www.helloasso.com/associations/les-studios-du-heron" target='_blank'>
-                                <p>Nous soutenir <i class="ri-external-link-line"></i></p>
+                                <p>Nous soutenir <i className="ri-external-link-line"></i></p>
                         </Link>
                         
                     </NavbarItem>
