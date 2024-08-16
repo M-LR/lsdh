@@ -38,6 +38,7 @@ const processData = (data) => {
   let heroText = '';
   let mainText = '';
   let values = [];
+  let team = [];
 
   data.forEach((item) => {
     item.properties.page.rich_text.forEach((page) => {
@@ -55,10 +56,17 @@ const processData = (data) => {
           chip : item.properties.chip.rich_text[0]?.text?.content || '',
         })
       }
+      if (page.text.content === 'team') {
+        team.push({
+          name: item.properties.title.title[0]?.text?.content || '',
+          presentation : item.properties.text.rich_text[0]?.text?.content || '',
+          status : item.properties.chip.rich_text[0]?.text?.content || '',
+        })
+      }
     });
   });
 
-  return { heroTitle, heroText, mainText, values };
+  return { heroTitle, heroText, mainText, values, team };
 };
 
 /**
@@ -71,6 +79,7 @@ export default function About() {
   const [heroText, setHeroText] = useState('');
   const [mainText, setMainText] = useState('');
   const [values, setValues] = useState([]);
+  const [team, setTeam] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const databaseId = process.env.NEXT_PUBLIC_NOTION_DATABASE_ID;
@@ -79,11 +88,12 @@ export default function About() {
     const loadNotionData = async () => {
       try {
         const data = await fetchNotionData(databaseId);
-        const { heroTitle, heroText, mainText, values } = processData(data);
+        const { heroTitle, heroText, mainText, values, team } = processData(data);
         setHeroTitle(heroTitle);
         setHeroText(heroText);
         setMainText(mainText);
         setValues(values);
+        setTeam(team);
       } catch (error) {
         console.error('Error fetching data:', error);
         setError(error.toString());
@@ -113,11 +123,11 @@ export default function About() {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row justify-center items-center mt-32 mx-auto max-w-screen-2xl'>
+      <div className='flex flex-col md:flex-row justify-center items-center mt-20 mx-auto max-w-screen-2xl'>
         <Hero heroTitle={heroTitle} heroText={heroText} mainText={mainText} />
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-center my-32 mx-auto max-w-screen-2xl py-10 shadow-xl dark:shadow-violet-600">
-        <Card values={values} />
+      <div className="flex flex-col md:flex-row justify-center items-center my-20 mx-auto max-w-screen-2xl py-7">
+        <Card values={values} team={team} />
       </div>
       <Footer />
     </>
