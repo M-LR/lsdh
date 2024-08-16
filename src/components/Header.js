@@ -54,9 +54,9 @@ const Header = () => {
     };
 
     const menuItems = [
-        { title: 'L\'association', link: '/about' },
-        { title: 'Nous soutenir', link: 'https://www.helloasso.com/associations/les-studios-du-heron' },
-        { title: 'Contacts', link: '/contact' }
+        { title: 'L\'association 🪿', link: '/about' },
+        { title: 'Nous soutenir ❤️', link: 'https://www.helloasso.com/associations/les-studios-du-heron' },
+        { title: 'Nous contacter ☎️', link: '/contact' }
     ];
 
     return (
@@ -77,20 +77,24 @@ const Header = () => {
                 </NavbarContent>
 
                 <NavbarContent className="hidden sm:flex flex-1" justify='center'>
+
                     {menuItems.slice(0, 3).map((item, index) => (
-                        <NavbarItem key={index}>
-                            <Link href={item.link} target={item.title === 'Nous soutenir' ? '_blank' : undefined}>
-                            
-                            {item.title !== 'Nous soutenir' && item.title}
-                            </Link>
-                            
-                        </NavbarItem>
-                    ))}
+
+                        item.title !== 'Nous soutenir ❤️' &&
+
+                            <NavbarItem key={index}>
+                                <Link href={item.link}>
+                                    {item.title }
+                                </Link>
+                            </NavbarItem>
+
+                        )
+                    )}
+
                     <NavbarItem className='flex-1'>
                         <Link href="https://www.helloasso.com/associations/les-studios-du-heron" target='_blank'>
                                 <p>Nous soutenir <i className="ri-external-link-line"></i></p>
-                        </Link>
-                        
+                        </Link>     
                     </NavbarItem>
                     {/* <NavbarItem className='flex-1'>
                         <Button onPress={onOpen}>
