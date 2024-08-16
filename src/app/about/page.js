@@ -65,7 +65,7 @@ const processData = (data) => {
  * @component
  * @description Composant principal pour la page d'accueil. Gère l'état de chargement et d'erreur, récupère et traite les données depuis Notion, et affiche les composants Hero, Card et Footer.
  */
-export default function Home() {
+export default function About() {
   const [error, setError] = useState(null);
   const [heroTitle, setHeroTitle] = useState('');
   const [heroText, setHeroText] = useState('');

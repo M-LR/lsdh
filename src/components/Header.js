@@ -56,7 +56,7 @@ const Header = () => {
     const menuItems = [
         { title: 'L\'association', link: '/about' },
         { title: 'Nous soutenir', link: 'https://www.helloasso.com/associations/les-studios-du-heron' },
-        { title: 'Contacts', link: '#' }
+        { title: 'Contacts', link: '/contact' }
     ];
 
     return (
@@ -77,7 +77,7 @@ const Header = () => {
                 </NavbarContent>
 
                 <NavbarContent className="hidden sm:flex flex-1" justify='center'>
-                    {menuItems.slice(0, 2).map((item, index) => (
+                    {menuItems.slice(0, 3).map((item, index) => (
                         <NavbarItem key={index}>
                             <Link href={item.link} target={item.title === 'Nous soutenir' ? '_blank' : undefined}>
                             
@@ -92,11 +92,11 @@ const Header = () => {
                         </Link>
                         
                     </NavbarItem>
-                    <NavbarItem className='flex-1'>
+                    {/* <NavbarItem className='flex-1'>
                         <Button onPress={onOpen}>
                             Contacts
                         </Button>
-                    </NavbarItem>
+                    </NavbarItem> */}
                 </NavbarContent>
 
                 <NavbarContent justify="end">
@@ -110,13 +110,9 @@ const Header = () => {
                 <NavbarMenu>
                     {menuItems.map((item, index) => (
                         <NavbarMenuItem key={index}>
-                            {item.title !== 'Contacts' ? (
-                                <Link className="w-full" href={item.link} size="lg">
-                                    {item.title}
-                                </Link>
-                            ) : (
-                                <Button onPress={onOpen}>{item.title}</Button>
-                            )}
+                            <Link className="w-full" href={item.link} size="lg">
+                                {item.title}
+                            </Link>
                         </NavbarMenuItem>
                     ))}
                 </NavbarMenu>
