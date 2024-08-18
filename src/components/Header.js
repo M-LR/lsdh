@@ -53,18 +53,25 @@ const Header = () => {
         localStorage.setItem('theme', newTheme);
     };
 
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+        console.log(isMenuOpen);
+         // Ferme le menu
+    };
+
+
     const menuItems = [
-        { title: 'L\'association 🪿', link: '/about' },
-        { title: 'Nous soutenir ❤️', link: 'https://www.helloasso.com/associations/les-studios-du-heron' },
-        { title: 'Nous contacter ☎️', link: '/contact' }
+        { title: 'L\'association', link: '/about' },
+        { title: 'Nous soutenir', link: 'https://www.helloasso.com/associations/les-studios-du-heron' },
+        { title: 'Nous contacter', link: '/contact' }
     ];
 
     return (
         <>
-            <Navbar onMenuOpenChange={setIsMenuOpen} className={`${raleway.className}`}>
+            <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className={`${raleway.className}`}>
                 <NavbarContent justify="start">
                     <NavbarMenuToggle
-                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                        aria-label={isMenuOpen ? "Open menu" : "Close menu"}
                         className="sm:hidden"
                     />
                     <NavbarBrand>
@@ -114,7 +121,7 @@ const Header = () => {
                 <NavbarMenu>
                     {menuItems.map((item, index) => (
                         <NavbarMenuItem key={index}>
-                            <Link className="w-full" href={item.link} size="lg">
+                            <Link className="w-full" href={item.link} size="lg" onClick={closeMenu}>
                                 {item.title}
                             </Link>
                         </NavbarMenuItem>

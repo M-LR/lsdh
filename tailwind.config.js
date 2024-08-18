@@ -35,7 +35,7 @@ module.exports = {
           dark: {
             // ...
             colors: {
-              background: '#020617', // slate-950
+              background: '#09090b', // zinc-950
               foreground: '#e4e4e7', // zinc-200
               primary: {
                 DEFAULT: "#7c3aed", // violet-600

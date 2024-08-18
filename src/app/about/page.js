@@ -123,9 +123,12 @@ export default function About() {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row justify-center items-center mt-20 mx-auto max-w-screen-2xl'>
-        <Hero heroTitle={heroTitle} heroText={heroText} mainText={mainText} />
+      <div className='container-fluid bg-violet-200 dark:bg-violet-800 py-1'>
+        <div className='flex flex-col md:flex-row justify-center items-center my-20 mx-auto max-w-screen-2xl pb-12'>
+          <Hero heroTitle={heroTitle} heroText={heroText} mainText={mainText} />
+        </div>
       </div>
+      
       <div className="flex flex-col md:flex-row justify-center items-center my-20 mx-auto max-w-screen-2xl py-7">
         <Card values={values} team={team} />
       </div>
