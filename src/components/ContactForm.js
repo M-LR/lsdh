@@ -54,7 +54,8 @@ export default function ContactForm() {
   <div className="flex flex-col items-center w-full">
 
     <div className="w-full p-4 relative">
-      <h1 className="text-4xl text-center">Vous souhaitez nous contacter ? 👀</h1>
+      <h1 className="text-4xl text-center pb-4">Vous souhaitez nous contacter ? 👀</h1>
+      <h5 className="text-center">Merci de remplir le formulaire ci-dessous.</h5>
       <div></div>
     </div>
 
@@ -63,7 +64,7 @@ export default function ContactForm() {
 
       <div className="flex flex-1 justify-center mx-4">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto p-4">
-          <div>
+          <div className="mb-6">
             <Input
               {...register('name')}
               clearable
@@ -102,7 +103,7 @@ export default function ContactForm() {
             <p className="text-red-600">{errors?.message ? errors.message.message : ''}</p>
           </div>
 
-          <Spacer y={3} />
+          <Spacer y={6} />
           { isSubmitSuccessful ? 'email envoyé ! 🚀 ' : <Button disabled={isSubmitted} type="submit" color="primary" shadow>
             Envoyer
           </Button>}
