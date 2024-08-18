@@ -123,7 +123,7 @@ export default function About() {
 
   return (
     <>
-      <div className='container-fluid bg-violet-200 dark:bg-violet-800 py-1'>
+      <div className='container-fluid py-1 bg-gradient-to-br from-violet-500/60 via-purple-600 to-violet-600 dark:from-violet-800 dark:via-purple-900 dark:to-violet-950 shadow-lg dark:shadow-violet-950'>
         <div className='flex flex-col md:flex-row justify-center items-center my-20 mx-auto max-w-screen-2xl pb-12'>
           <Hero heroTitle={heroTitle} heroText={heroText} mainText={mainText} />
         </div>
