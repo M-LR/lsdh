@@ -87,7 +87,7 @@ const Header = () => {
 
                     {menuItems.slice(0, 3).map((item, index) => (
 
-                        item.title !== 'Nous soutenir ❤️' &&
+                        item.title !== 'Nous soutenir' &&
 
                             <NavbarItem key={index}>
                                 <Link href={item.link}>
