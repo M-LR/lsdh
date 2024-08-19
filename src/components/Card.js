@@ -2,18 +2,28 @@
 import React from "react";
 import {Chip, Image} from "@nextui-org/react";
 import Member from "./Member";
-import { Raleway, Ubuntu } from "next/font/google";
+import { Ubuntu } from "next/font/google";
+import { useInView } from 'react-intersection-observer';
+import { LuHeartHandshake } from "react-icons/lu";
+import { RiTeamLine } from "react-icons/ri";
 
 const ubuntu = Ubuntu({ weight: ['300','500', '700'], subsets: ["latin"]});
 
+
 export default function Card({values, team}) {
+
+  const { ref, inView } = useInView({
+    threshold: 0.3,    // 30% du texte doit être visible pour déclencher l'animation
+  });
+
+  let time = 0;
 
   return (
   <div className="flex flex-col items-center w-full">
 
-    <div className="w-full p-4 relative">
-      <h1 className={`${ubuntu.className} text-4xl text-center text-violet-900 dark:text-pink-500`}>Les valeurs du Héron</h1>
-      <div></div>
+    <div className="flex flex-col w-full p-4 relative text-center items-center text-violet-900 dark:text-pink-500">
+      <LuHeartHandshake size={50}/>
+      <h1 className={`${ubuntu.className} text-4xl`}>Les valeurs du Héron</h1>  
     </div>
 
     <div className="flex md:flex-row flex-col w-full my-20 dark:bg-zinc-950 shadow-lg dark:shadow-violet-600 md:rounded-lg bg-violet-700">
@@ -49,20 +59,30 @@ export default function Card({values, team}) {
     </div>
 
 
-    <div className="w-full p-4 relative my-7">
-      <h1 className={`${ubuntu.className} text-4xl text-center text-violet-900 dark:text-pink-400`}>L&apos;équipe</h1>
+    <div className="flex flex-col w-full p-4 relative my-7 items-center text-center text-violet-900 dark:text-pink-500">
+      <RiTeamLine size={50}/>
+      <h1 className={`${ubuntu.className} text-4xl`}>L&apos;équipe</h1>
       <div></div>
     </div>
 
     <div className="flex md:flex-row flex-col justify-center w-full mt-4">
-      <div className="flex flex-col md:flex-row justify-center mx-4">
+      <div ref={ref} className="flex flex-col md:flex-row justify-center mx-4">
         {team
           .sort((a, b) => b.name.localeCompare(a.name)) 
-          .map((item, index) => (
+          .map((item, index) => {
+            time += .5;
+            return (
+            <Member key={index} name={item.name} presentation={item.presentation} status={item.status} css={{
+              transition: `all ease-out ${time}s`,
+              transform: inView ? 'translateY(0)' : 'translateY(-80px)',
+              opacity: inView ? 1 : 0,
+            }} />
+          )
             
-            <Member key={index} name={item.name} presentation={item.presentation} status={item.status}/>
            
-        ))}
+          })
+        }
+
             
       </div> 
     </div>

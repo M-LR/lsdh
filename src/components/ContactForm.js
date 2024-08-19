@@ -54,7 +54,7 @@ export default function ContactForm() {
   <div className="flex flex-col items-center w-full">
 
     <div className="w-full p-4 relative">
-      <h1 className="text-4xl text-center pb-4">Vous souhaitez nous contacter ? 👀</h1>
+      <h1 className="text-4xl text-center pb-4 text-violet-900 dark:text-pink-500">Vous souhaitez nous contacter ? 👀</h1>
       <h5 className="text-center">Merci de remplir le formulaire ci-dessous.</h5>
       <div></div>
     </div>

@@ -10,6 +10,7 @@ import Loading from '@/components/Loading';
 import Hero from '@/components/Hero';
 import Card from "@/components/Card";
 import Footer from '@/components/Footer';
+import { useInView } from 'react-intersection-observer';
 
 /**
  * @function fetchNotionData
@@ -105,6 +106,10 @@ export default function About() {
     loadNotionData();
   }, [databaseId]);
 
+  const { ref, inView } = useInView({
+    threshold: 0.3,    // 30% du texte doit être visible pour déclencher l'animation
+  });
+
   if (isLoading) {
     return (
       <div className="flex flex-col md:flex-row justify-center items-center mt-52">
@@ -124,8 +129,17 @@ export default function About() {
   return (
     <>
       <div className='container-fluid py-1 bg-gradient-to-br from-violet-500/60 via-purple-600 to-violet-600 dark:from-violet-800 dark:via-purple-900 dark:to-violet-950 shadow-lg dark:shadow-violet-950'>
-        <div className='flex flex-col md:flex-row justify-center items-center my-20 mx-auto max-w-screen-2xl pb-12'>
-          <Hero heroTitle={heroTitle} heroText={heroText} mainText={mainText} />
+        <div className='flex flex-col md:flex-row justify-center items-center my-20 mx-auto max-w-screen-2xl pb-12' ref={ref} style={{
+              transition: 'all 0.6s ease-out',
+              transform: inView ? 'translateY(0)' : 'translateY(-80px)',
+              opacity: inView ? 1 : 0,
+            }}
+          >
+          <Hero 
+            heroTitle={heroTitle} 
+            heroText={heroText} 
+            mainText={mainText}
+          />
         </div>
       </div>
       
