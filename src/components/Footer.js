@@ -24,11 +24,11 @@ const Footer = () => {
             <h2 className="text-xl font-bold mb-4">Suivez-nous</h2>
             <div className="flex space-x-4">
             
-              <Button onPress={onOpen} color='primary'>
+              <Button onPress={onOpen} color='primary' aria-label='compte instagram'>
                 <i className="ri-instagram-line ri-xl"></i>
               </Button>
 
-              <Button onPress={onOpen} color='primary'>
+              <Button onPress={onOpen} color='primary' aria-label='compte youtube'>
                 <i className="ri-youtube-line ri-xl"></i>
               </Button>
           
