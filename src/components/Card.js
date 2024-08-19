@@ -12,7 +12,7 @@ export default function Card({values, team}) {
   <div className="flex flex-col items-center w-full">
 
     <div className="w-full p-4 relative">
-      <h1 className={`${ubuntu.className} text-4xl text-center`}>Les valeurs du Héron</h1>
+      <h1 className={`${ubuntu.className} text-4xl text-center text-violet-900 dark:text-pink-500`}>Les valeurs du Héron</h1>
       <div></div>
     </div>
 
@@ -22,14 +22,14 @@ export default function Card({values, team}) {
 
           {values.map((item, index) => (
 
-            <li key={index} className={`${item.text.length > 200 ?' h-[300px] sm:h-[200px]' : 'h-[200px]'}  flex flex-col justify-center p-4 w-full text-violet-50`}>
+            <li key={index} className={`${item.text.length > 200 ?' h-[300px] sm:h-[200px]' : 'h-[200px]'}  flex flex-col justify-center p-4 w-full`}>
             <p>
               <Chip size="lg" color="primary">
                 <i className={`${item.chip} ri-xl`}></i>
               </Chip> &nbsp; 
-                {item.title}
+               <span className="text-zinc-100 dark:text-pink-400 text-large font-bold"> {item.title}</span>
               </p>
-              <p className="mx-[65px] mt-4 text-left text-violet-100 dark:text-violet-500 w-2/3">
+              <p className="mx-[65px] mt-4 text-left text-violet-100 w-2/3">
                 {item.text}
               </p>
           </li>
@@ -50,14 +50,14 @@ export default function Card({values, team}) {
 
 
     <div className="w-full p-4 relative my-7">
-      <h1 className={`${ubuntu.className} text-4xl text-center`}>L&apos;équipe</h1>
+      <h1 className={`${ubuntu.className} text-4xl text-center text-violet-900 dark:text-pink-400`}>L&apos;équipe</h1>
       <div></div>
     </div>
 
     <div className="flex md:flex-row flex-col justify-center w-full mt-4">
       <div className="flex flex-col md:flex-row justify-center mx-4">
         {team
-          .sort((a, b) => a.name.localeCompare(b.name)) 
+          .sort((a, b) => b.name.localeCompare(a.name)) 
           .map((item, index) => (
             
             <Member key={index} name={item.name} presentation={item.presentation} status={item.status}/>

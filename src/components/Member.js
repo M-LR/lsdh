@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect }from "react";
 import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 
 const Member = ({name, presentation, status}) => {
+
+    
 
     return (
         <Card className="flex-1 py-4 m-2 dark:bg-zinc-950 shadow-md dark:shadow-violet-600">

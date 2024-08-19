@@ -6,12 +6,12 @@ import Link from "next/link";
     return (
       <>
         <div className="mx-4 mt-10 md:w-1/3 justify-center">
-            <h1 className="text-5xl font-bold"> {heroTitle}</h1>
+            <h1 className="text-5xl font-bold text-violet-900 dark:text-pink-500"> {heroTitle}</h1>
             <p className="py-6 text-zinc-100">
             {heroText}
             </p>
             
-            <Button color="primary" variant="solid" as={Link} href="https://www.helloasso.com/associations/les-studios-du-heron" target="blanl">
+            <Button color="primary" variant="solid" as={Link} href="https://www.helloasso.com/associations/les-studios-du-heron" target="blanl" aria-label="lien Helloasso">
                 Soutenez-nous
             </Button>
             

@@ -22,6 +22,7 @@ const ThemeSwitcher = ({ isDarkMode, toggleDarkMode, theme }) => (
             <i className="ri-sun-fill text-xl"></i>
         )}
         <Switch
+            aria-label="modification du thème"
             color="primary"
             isSelected={isDarkMode}
             onChange={toggleDarkMode}
